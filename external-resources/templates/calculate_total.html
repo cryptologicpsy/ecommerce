@@ -1,0 +1,47 @@
+<!-- calculate_total.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="template.css">
+  <link rel="stylesheet" href="global2.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Checkout Page</h1>
+    
+    <h2>ORDER SUMMARY</h2>
+    <div id="order-summary"></div>
+    
+    <h2>CUSTOMER DETAILS</h2>
+    <div id="customer-details"></div>
+    
+    <h2>PRODUCT DETAILS</h2> <!-- Νέο section για την εμφάνιση των προϊόντων -->
+    <div id="product-details"></div>
+    
+    <div id="final-summary"></div>
+    
+    <div id="shipping-cost"></div>
+    
+    <form id="payment-form">
+        <label for="payment-element">
+            Credit or debit card
+        </label>
+        <div id="payment-element">
+            <!-- A Stripe Element will be inserted here. -->
+        </div>
+        <!-- Used to display form errors. -->
+        <div id="card-errors" role="alert"></div>
+        <button type="submit">Pay</button>
+    </form>
+
+    <button type="button" id="back-button" class="btn btn-secondary">Back to Checkout</button>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="js/calculate_total.js"></script>
+</body>
+</html>

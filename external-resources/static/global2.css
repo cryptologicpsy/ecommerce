@@ -1,0 +1,142 @@
+
+.vector-parent {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 681px;
+  overflow: hidden;
+  font-size: 64px;
+  font-family: var(--textstyle2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+h1,
+h2{
+	font-weight: bolder;
+	font-size: 50px;
+	font-family: "Inter", sans-serif;
+}
+h3,
+h5,
+h6,
+.display-1,
+.display-2,
+.display-4,
+.display-5,
+.display-7,
+span,
+p {
+	text-align: center;
+}
+a {
+	text-decoration: none !important; /* Αφαίρεση υπογράμμισης */
+  color: inherit !important; /* Επαναφορά στο προεπιλεγμένο χρώμα του κειμένου */
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+  transition-delay: 9999s;
+  -webkit-transition-property: background-color, color;
+  transition-property: background-color, color;
+}
+
+textarea[type=hidden] {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+  
+  button {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 15px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-family: "Inter", sans-serif;
+        text-decoration: none;
+
+  }
+  button:hover {
+    background-color: white;
+    color: black;
+  }
+  
+
+
+.number {
+  display: block;
+  /*font-size: 2em;*/
+}
+
+.text {
+  display: block;
+  font-size: 0.5em;
+}
+
+
+
+
+
+
+
+  
+
+

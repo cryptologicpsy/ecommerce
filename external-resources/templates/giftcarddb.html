@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Card Management</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gift Card Management</h1>
+
+    <div>
+        <label for="search">Search by UUID (full or first 6 characters):</label>
+        <input type="text" id="search" placeholder="Enter UUID or prefix">
+        <button onclick="searchGiftCards()">Search</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Order ID</th>
+                <th>Customer Email</th>
+                <th>Price</th>
+                <th>Product ID</th>
+                <th>UUID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="giftCardTable">
+            <!-- Rows will be populated here -->
+        </tbody>
+    </table>
+
+    <script>
+        const apiUrl = '/api/admin/giftcards'; // Update with your API endpoint
+
+        // Fetch and display all gift cards
+        async function loadGiftCards() {
+            try {
+                const response = await fetch(apiUrl);
+                const giftCards = await response.json();
+                displayGiftCards(giftCards);
+            } catch (error) {
+                console.error('Error loading gift cards:', error);
+            }
+        }
+
+        // Display gift cards in the table
+        function displayGiftCards(giftCards) {
+            const tableBody = document.getElementById('giftCardTable');
+            tableBody.innerHTML = ''; // Clear existing rows
+            giftCards.forEach(card => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${card.id}</td>
+                    <td>${card.orderId}</td>
+                    <td>${card.customerEmail}</td>
+                    <td>${card.giftCardPrice}</td>
+                    <td>${card.productId}</td>
+                    <td>${card.uuid}</td>
+                    <td>
+                        <button onclick="deleteGiftCard('${card.uuid}')">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Search gift cards by UUID or UUID prefix
+        async function searchGiftCards() {
+            const searchValue = document.getElementById('search').value;
+            try {
+                const response = await fetch(`${apiUrl}/search?uuid=${searchValue}`);
+                const giftCards = await response.json();
+                displayGiftCards(giftCards);
+            } catch (error) {
+                console.error('Error searching gift cards:', error);
+            }
+        }
+
+        // Delete a gift card by UUID
+        async function deleteGiftCard(uuid) {
+            if (confirm('Are you sure you want to delete this gift card?')) {
+                try {
+                    const response = await fetch(`${apiUrl}/${uuid}`, {
+                        method: 'DELETE'
+                    });
+                    if (response.ok) {
+                        alert('Gift card deleted successfully!');
+                        loadGiftCards(); // Reload the table after deletion
+                    } else {
+                        alert('Failed to delete gift card.');
+                    }
+                } catch (error) {
+                    console.error('Error deleting gift card:', error);
+                }
+            }
+        }
+
+        // Load all gift cards on page load
+        window.onload = loadGiftCards;
+    </script>
+</body>
+</html>

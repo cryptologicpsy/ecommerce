@@ -1,0 +1,625 @@
+
+
+
+.divtheme-socials-container-icon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%; /* Χρησιμοποιήστε ποσοστιαία τιμή για το πλάτος */
+  max-width: 300px; /* Μέγιστο πλάτος για να μην μεγαλώσει περισσότερο από 300px */
+  height: 139px;
+  margin-right: 10px; /* Προσθήκη δεξιού περιθωρίου */
+}
+
+.list-item,
+.list-item1,
+.list-item2,
+.list-item3,
+.list-item4,
+.list-item5 {
+  position: absolute;
+  top: 25.5px;
+  left: calc(50% - 227.6px);
+  line-height: 27.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43.4px;
+  height: 27.2px;
+}
+
+.list-item1,
+.list-item2,
+.list-item3,
+.list-item4,
+.list-item5 {
+  left: calc(50% - 160.6px);
+  width: 64px;
+}
+
+.list-item2,
+.list-item3,
+.list-item4,
+.list-item5 {
+  left: calc(50% - 73px);
+  width: 47.4px;
+}
+
+.list-item3,
+.list-item4,
+.list-item5 {
+  left: calc(50% - 2px);
+  width: 66.1px;
+}
+
+.list-item4,
+.list-item5 {
+  left: calc(50% + 87.8px);
+  width: 29.3px;
+}
+
+.list-item5 {
+  position: absolute;
+  top: 25.5px;
+  left: calc(50% - 22.2vw);
+  line-height: 27.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(4vw);
+  height: 27.2px;
+}
+
+/* Επιπλέον στυλ για ανταποκριτικό σχεδιασμό */
+@media screen and (max-width: 768px) {
+	
+  .divtheme-socials-container-icon {
+    width: 90%;
+    max-width: none;
+  }
+
+  .list-item,
+  .list-item1,
+  .list-item2,
+  .list-item3,
+  .list-item4,
+  .list-item5 {
+    left: calc(50% - 160.6px);
+    width: 64px;
+  }
+
+  .list-item2,
+  .list-item3,
+  .list-item4,
+  .list-item5 {
+    left: calc(50% - 73px);
+    width: 47.4px;
+  }
+
+  .list-item3,
+  .list-item4,
+  .list-item5 {
+    left: calc(50% - 2px);
+    width: 66.1px;
+  }
+
+  .list-item4,
+  .list-item5 {
+    left: calc(50% + 87.8px);
+    width: 29.3px;
+  }
+
+  .list-item5 {
+    left: calc(50% - 22.2vw);
+    width: calc(4vw);
+  }
+}
+
+.divfooter-end,
+.navigation {
+  position: absolute;
+  top: 139px;
+  width: 100%;
+  height: 78.4px;
+}
+.divfooter-end {
+  top: 0;
+  height: 217.4px;
+}
+.all-right-reserved {
+  position: absolute;
+  top: 227.5px;
+  left: calc(50% - 60.5px);
+  font-size: 11px;
+  line-height: 18.7px;
+  color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 121.4px;
+  height: 18.7px;
+}
+.footer {
+  position: absolute;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-black);
+  height: 348px;
+  color: var(--color-silver);
+}
+.about-clowntown {
+  position: absolute;
+  top: 8px;
+  left: 71px;
+  line-height: 90.75px;
+  display: inline-block;
+  white-space: pre-wrap;
+  width: 522px;
+  height: 59px;
+}
+.welcome-to-the {
+  margin: 0;
+}
+.welcome-to-the-container {
+  position: absolute;
+  top: 96px;
+  left: 180px;
+  font-size: var(--textstyle2-size);
+  font-family: var(--textstyle2);
+  display: inline-block;
+  width: 462px;
+  height: 394px;
+}
+.divwpb-row-child {
+  position: absolute;
+  top: 38px;
+  left: 728px;
+  width: 521px;
+  height: 509px;
+  object-fit: cover;
+}
+.beforemask-group-icon {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.read-more {
+  position: absolute;
+  top: calc(50% - 16.9px);
+  left: calc(50% - 65.4px);
+  letter-spacing: 1.16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 131.2px;
+  height: 34px;
+}
+.link {
+  position: absolute;
+  height: calc(100% - 560.7px);
+  top: 490px;
+  bottom: 70.7px;
+  left: 230px;
+  border: 2px solid var(--color-white);
+  box-sizing: border-box;
+  width: 204.8px;
+  text-align: center;
+  font-size: var(--font-size-2xl-8);
+  font-family: var(--font-inter);
+}
+.divwpb-row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto; /* Χρησιμοποιήστε το ύψος της οθόνης για το ύψος του στοιχείου */
+  overflow: hidden;
+ 
+}
+.heading-2 {
+  position: absolute;
+  top: 150px;
+  left: calc(50% - 184px);
+  line-height: 90.75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 368px;
+  height: 60px;
+
+}
+.beforemask-group-icon1 {
+  position: absolute;
+  height: calc(100% - 0.2px);
+  width: calc(100% - 0.2px);
+  top: 0;
+  right: 0.2px;
+  bottom: 0.2px;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.view-all {
+  position: absolute;
+  top: calc(50% - 17px);
+  left: calc(50% - 65.5px);
+  letter-spacing: 1.16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 131.2px;
+  height: 34px;
+}
+.link1 {
+  position: absolute;
+  height: 80px;
+  left: calc(50% - 102px);
+  border: 2px solid var(--color-white);
+  box-sizing: border-box;
+  width: 205px;
+  font-size: var(--font-size-2xl-8);
+  font-family: var(--font-inter);
+  z-index: 999;
+}
+
+
+
+.divwpb-row1 {
+   position: absolute;
+    top: 600px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgb(232, 232, 232);
+    	 height: auto;
+    	 text-align: center; /* Κεντράρισμα του περιεχομένου */
+    	 
+}
+#divwpb-row1 h1 {
+    color: rgb(0, 0, 0); /* Ορίζει το χρώμα του κειμένου μέσα στο h1 στο div με id "divwpb-row1" σε άσπρο */
+    margin-top: 50px;
+}
+
+#artists-list img {
+    width: 200px; /* Ορίζει το πλάτος των εικόνων σε 200 pixels */
+    height: 200px; /* Κάνει το ύψος των εικόνων να προσαρμόζεται αυτόματα ώστε να διατηρείται η αναλογία */
+    margin-bottom: 100px;
+}
+
+.heading-21 {
+  position: absolute;
+  top: 35px;
+  left: calc(50% - 207px);
+  line-height: 90.75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 414px;
+  height: 95px;
+}
+.we-specialize-in-container1 {
+  width: 100%;
+}
+.meet-our-artists,
+.we-specialize-in-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+.we-specialize-in-container {
+  top: 156px;
+  left: calc(50% - 570px);
+  font-size: var(--font-size-base);
+  line-height: 27.2px;
+  font-family: var(--font-roboto);
+  width: 1140.8px;
+  height: 81.6px;
+}
+.meet-our-artists {
+  top: calc(50% - 17px);
+  left: calc(50% - 102.5px);
+  letter-spacing: 1.16px;
+  justify-content: center;
+  width: 205px;
+  height: 35px;
+}
+.link2 {
+  position: absolute;
+  height: calc(100% - 664px);
+  top: 596px;
+  bottom: 68px;
+  left: calc(50% - 126px);
+  border: 2px solid var(--color-white);
+  box-sizing: border-box;
+  width: 253px;
+  font-size: var(--font-size-2xl-8);
+  font-family: var(--font-inter);
+}
+.main-child {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+ #divwpb-row2 {
+  padding: 20px; /* Εσωτερικό padding για το divwpb-row2 */
+background-color: rgb(0, 0, 0);
+  border: 1px solid #ddd; /* Περίγραμμα για το divwpb-row2 */
+  border-radius: 5px; /* Στρογγυλεμένες άκρες για το divwpb-row2 */
+ height: auto;
+  overflow: auto; /* Επισύρει το περιεχόμενο εντός του στοιχείου */
+}
+
+#divwpb-row2 h1 {
+  font-size: 40px; /* Μέγεθος γραμματοσειράς για τον τίτλο */
+  color: rgb(255, 255, 255); /* Χρώμα γραμματοσειράς για τον τίτλο */
+  margin-top: 100px;
+}
+
+#divwpb-row2 p {
+  font-size: 20px; /* Μέγεθος γραμματοσειράς για το κείμενο */
+  color: rgb(255, 255, 255); /* Χρώμα γραμματοσειράς για το κείμενο */
+    margin-top: 50px;
+
+}
+
+#divwpb-row2 img {
+    width: 500PX; /* Ορίζει το πλάτος της εικόνας */
+    height: 500px; /* Κάνει το ύψος της εικόνας να προσαρμόζεται αυτόματα ώστε να διατηρείται η αναλογία */
+    float: left; /* Τοποθετεί την εικόνα αριστερά */
+    margin-right: 15px; /* Προσθέτει ένα περιθώριο δεξιά της εικόνας για να χωράει το κείμενο */
+}
+.main-child {
+  top: 2395px;
+  height: 488px;
+  object-fit: cover;
+}
+.heading-22 {
+  position: absolute;
+  top: 2450px;
+  left: calc(50% - 154px);
+  line-height: 90.75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 308px;
+  height: 60px;
+}
+.main {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3200px;
+  overflow: hidden;
+  font-size: var(--textstyle1-size);
+  font-family: var(--textstyle1);
+}
+
+.get-your-own {
+  position: absolute;
+  top: 201px;
+  left: calc(50% - 268px);
+  display: inline-block;
+  width: 535px;
+  height: 155px;
+  color: white;
+}
+.book-an-appointment {
+  position: absolute;
+  top: calc(50% - 16.9px);
+  left: calc(50% - 141.25px);
+  letter-spacing: 1.16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 282.9px;
+  height: 34px;
+  color: white;
+}
+.link3 {
+  position: absolute;
+  height: calc(100% - 601.2px);
+  top: 405px;
+  bottom: 196.2px;
+  left: calc(50% - 178px);
+  border: 2px solid var(--color-white);
+  box-sizing: border-box;
+  width: 356.5px;
+  font-size: 21.4px;
+  font-family: var(--font-inter);
+}
+.vector-parent {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 681px;
+  overflow: hidden;
+  font-size: 64px;
+  font-family: var(--textstyle2);
+}
+.wwwgoodkindtattoocom-by-html {
+  width: 100%;
+  position: absolute;
+  height: 3220px;
+  text-align: center;
+  font-size: var(--font-size-base);
+  color: var(--color-white);
+  font-family: var(--font-roboto);
+}
+
+
+
+#artists-list {
+  display: flex;
+  justify-content: center; /* Κεντράρισμα των καλλιτεχνών οριζόντια */
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 100px;
+  
+}
+
+#artists-list .artist {
+  width: calc(25% - 20px); /* Αυτό θα δημιουργήσει 4 στήλες με κατάλληλο διάστημα ανάμεσά τους */
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.artist h2,
+.artist p {
+  font-size: 10px; /* Ρυθμίζει το μέγεθος των γραμμάτων των ονομάτων και των περιγραφών */
+  
+}
+
+
+#artists-list .artist img {
+width: 200px; /* ή οποιοδήποτε άλλο πλάτος επιθυμείτε */
+  height: 200px; /* ή οποιοδήποτε άλλο ύψος επιθυμείτε */
+  object-fit: cover; /* Εξασφαλίζει ότι η εικόνα θα καλύπτει ολόκληρο τον χώρο του πλάτους και του ύψους */
+    filter: grayscale(100%); /* Κάνει τις εικόνες ασπρόμαυρες */
+
+}
+.navigation-arrows {
+  display: flex;
+  align-items: center;
+  margin-top: 10px; /* Προσθήκη κάποιου κενού από την προηγούμενη περιοχή */
+}
+
+.navigation-arrows button {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+}
+
+.navigation-arrows button:hover {
+  color: #000;
+}
+
+#artists-carousel {
+    margin-top: 250px; /* Αλλάξτε την απόσταση ανάλογα με την προτίμησή σας */
+}
+
+.carousel {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /* Προσαρμόστε το πλάτος του carousel όπως επιθυμείτε */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Χρώμα των βελακίων */
+    border-radius: 50%; /* Στρογγυλεύει τα βελάκια */
+    width: 30px; /* Προσαρμόστε το πλάτος των βελακίων */
+    height: 30px; /* Προσαρμόστε το ύψος των βελακίων */
+    line-height: 30px; /* Κάνει το εικονίδιο να είναι στο κέντρο του κύκλου */
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Χρώμα των βελακίων όταν το ποντίκι τοποθετείται επάνω τους */
+}
+
+.carousel-control-prev {
+    margin-left: -100px; /* Μετακινεί το βέλος προς τα αριστερά */
+}
+
+.carousel-control-next {
+    margin-right: -100px; /* Μετακινεί το βέλος προς τα δεξιά */
+}
+
+
+#gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 200px);
+    gap: 10px; /* Απόσταση μεταξύ των εικόνων */
+    margin: 0 auto; /* Κεντράρισμα οριζόντια */
+    justify-content: center; /* Κεντράρισμα οριζόντια */
+
+}
+
+.photo img {
+    width: 100%; /* Κάνετε την εικόνα να καλύπτει τον πλήρη πλάτος του πλέγματος */
+    height: 100%; /* Κάνετε την εικόνα να καλύπτει τον πλήρη ύψος του πλέγματος */
+    object-fit: cover; /* Κλιμάκωση της εικόνας για να καλύψει τον χώρο του πλέγματος */
+    margin-top: 100px; /* Προσθήκη margin-top 20 pixels σε κάθε εικόνα */
+}
+.about-clowntown {
+    margin-left: 90px;
+}
+
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+ background-color: rgba(21, 29, 32, 0.9) !important; /* Καθορίζει το χρώμα του φόντου με διαφάνεια */
+ height: 80px;
+}
+
+.navbar-nav .nav-link {
+  color: white !important; /* Καθορίζει το χρώμα των γραμμάτων σε λευκό */
+  font-family: 'Inter', sans-serif; /* Καθορίζει τη γραμματοσειρά σε Rag 123 ή οποιαδήποτε γενική sans-serif */
+  font-weight: normal !important;
+  font-size: 10px;
+}
+.navbar-brand {
+  color: white !important; /* Καθορίζει το χρώμα των γραμμάτων του λογότυπου σε λευκό */
+  
+}
+.navbar-toggler-icon{
+	color: white;
+   
+ z-index: 1000 !important;/* Καθορίζει το χρώμα του εικονιδίου του μενού σε λευκό */
+}
+
+.navbar-logo {
+  width: 170px; /* Orismos megethous eikonas */
+  height: auto; /* To megethos ths eikonas tha diatereitai kata ton arithmo pou orisate sthn 'width' */
+  margin-bottom: 10px;
+  
+  .text-above-image {
+    margin-top: 100px; /* Orizoume tin apostasi apo tis ikones */
+  }
+  
+  .square {
+    width: 100%; /* Orise tin platos ton tetragonon */
+    height: 100px; /* Orise to upsos ton tetragonon */
+    background-color: red; /* Orise ton xrwma tou tetragonou */
+    position: absolute; /* Orise tin thesi tou tetragonou */
+     z-index: 999; /* Sigoura thigei to tetragwno sthn koryfi */
+}
+  
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

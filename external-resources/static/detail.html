@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="detail.css">
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+    <style>
+        .fancybox-container {
+    z-index: 999999999; /* Μπορείτε να αυξήσετε τον αριθμό αν θέλετε προτεραιότητα */
+}
+    </style>
+    
+</head>
+<body>
+    <div id="app"></div>
+    <div id="temporaryContent">
+        <main class="main-content" style="margin-top: 80px;">
+            <div class="title" style="padding: 20px;">PRODUCT DETAILS</div>
+            <div class="detail">
+                <div class="image" id="imageContainer" style="padding: 19px;"></div>
+                <div class="content">
+                    <h1 class="name" id="productName"></h1>
+                    <div class="price" id="productPrice"></div>
+                    <div class="sizes">
+                        <label for="sizeSelect">available sizes:</label>
+                        <select id="sizeSelect">
+                            <!-- Sizes will be populated here -->
+                        </select>
+                    </div>
+                    <div class="buttons">
+                        <button onclick="window.location.href='/checkout';">Check Out</button>
+                        <button class="addCart">Add To Cart</button>
+                    </div>
+                    <div class="description" id="productDescription"></div>
+                </div>
+            </div>
+            <div class="title" style="padding: 20px; margin-top: 30px;">Similar products</div>
+            <div class="listProduct"></div>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script src="js/detail.js" type="module"></script>
+
+</body>
+</html>

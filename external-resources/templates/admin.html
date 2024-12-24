@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+</head>
+<body>
+<h2>Add Product</h2>
+<form id="addProductForm" enctype="multipart/form-data">
+
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br>
+    <label for="description">Description:</label><br>
+    <input type="text" id="description" name="description" required><br>
+    <label for="price">Price:</label><br>
+    <input type="number" id="price" name="price" step="0.01" required><br><br>
+    <label for="length">Length (mm):</label><br>
+    <input type="number" id="length" name="length" step="0.01" required><br>
+    <label for="width">Width (mm):</label><br>
+    <input type="number" id="width" name="width" step="0.01" required><br>
+    <label for="height">Height (mm):</label><br>
+    <input type="number" id="height" name="height" step="0.01" required><br>
+    <label for="weight">Weight (kg):</label><br>
+    <input type="number" id="weight" name="weight" step="0.01" required><br><br>
+    <label for="image">Product Image:</label><br>
+    <input type="file" id="image" name="file" multiple required><br><br>
+
+    <label>Sizes:</label><br>
+    <input type="checkbox" id="sizeS" name="size" value="S">
+    <label for="sizeS">S</label><br>
+    <input type="checkbox" id="sizeM" name="size" value="M">
+    <label for="sizeM">M</label><br>
+    <input type="checkbox" id="sizeL" name="size" value="L">
+    <label for="sizeL">L</label><br><br>
+    <input type="checkbox" id="sizeXl" name="size" value="XL">
+    <label for="sizeXl">XL</label><br><br>
+    <input type="submit" value="Submit">
+    <label for="giftCard">Is Gift Card:</label>
+    <input type="checkbox" id="giftCard" name="giftCard"><br><br>
+</form>
+
+<h2>Products</h2>
+<ul id="productList"></ul>
+
+<!-- Form for updating product -->
+<div id="updateProductFormContainer" style="display: none;">
+    <h2>Update Product</h2>
+    <form id="updateProductForm">
+        <label for="updateName">Name:</label><br>
+        <input type="text" id="updateName" name="name" required><br>
+        <label for="updateDescription">Description:</label><br>
+        <input type="text" id="updateDescription" name="description" required><br>
+        <label for="updatePrice">Price:</label><br>
+        <input type="number" id="updatePrice" name="price" step="0.01" required><br><br>
+        <label for="updateLength">Length (mm):</label><br>
+        <input type="number" id="updateLength" name="length" step="0.01" required><br>
+        <label for="updateWidth">Width (mm):</label><br>
+        <input type="number" id="updateWidth" name="width" step="0.01" required><br>
+        <label for="updateHeight">Height (mm):</label><br>
+        <input type="number" id="updateHeight" name="height" step="0.01" required><br>
+        <label for="updateWeight">Weight (kg):</label><br>
+        <input type="number" id="updateWeight" name="weight" step="0.01" required><br><br>
+        <label>Sizes:</label><br>
+        <input type="checkbox" id="updateSizeS" name="updateSize" value="S">
+        <label for="updateSizeS">S</label><br>
+        <input type="checkbox" id="updateSizeM" name="updateSize" value="M">
+        <label for="updateSizeM">M</label><br>
+        <input type="checkbox" id="updateSizeL" name="updateSize" value="L">
+        <label for="updateSizeL">L</label><br><br>
+        <input type="checkbox" id="updateSizeXl" name="updateSize" value="XL">
+        <label for="updateSizeXl">XL</label><br><br>
+        <input type="hidden" id="updateProductId">
+        <input type="submit" value="Update">
+    </form>
+</div>
+
+<script>
+    // Get data from the form
+    function getProductData() {
+        return {
+            name: document.getElementById("name").value,
+            description: document.getElementById("description").value,
+            price: parseFloat(document.getElementById("price").value),
+            length: parseFloat(document.getElementById("length").value),
+            width: parseFloat(document.getElementById("width").value),
+            height: parseFloat(document.getElementById("height").value),
+            weight: parseFloat(document.getElementById("weight").value),
+            sizes: Array.from(document.querySelectorAll('input[name="size"]:checked')).map(cb => cb.value.toUpperCase()),
+            giftCard: document.getElementById("giftCard").checked
+        };
+    }
+
+    function getUpdateProductData(){
+        return {
+            name: document.getElementById("name").value,
+            description: document.getElementById("updateDescription").value,
+            price: parseFloat(document.getElementById("updatePrice").value),
+            length: parseFloat(document.getElementById("updateLength").value),
+            width: parseFloat(document.getElementById("updateWidth").value),
+            height: parseFloat(document.getElementById("updateHeight").value),
+            weight: parseFloat(document.getElementById("updateWeight").value),
+            sizes: Array.from(document.querySelectorAll('input[name="updateSize"]:checked')).map(cb => cb.value.toUpperCase()),
+        };
+    }
+
+    document.getElementById("addProductForm").onsubmit = function(event) {
+        event.preventDefault();
+
+        var product = getProductData();
+
+        // Collect all the files from the input
+        var imageData = new FormData();
+        var imageFiles = document.getElementById("image").files;
+
+        Array.from(imageFiles).forEach(file => {
+            imageData.append('file', file);
+        });
+
+        // Send the image data first
+        fetch('/products/uploadImages', {
+            method: 'POST',
+            body: imageData
+        })
+        .then(response => response.json())
+        .then(fileDownloadUris => {
+            product.photoUrls = fileDownloadUris;
+
+            // Send the product data after image upload
+            fetch('/products/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(product)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Product added:', data);
+                fetchProducts(); // Reload products
+            })
+            .catch(error => console.error('Error adding product:', error));
+        })
+        .catch(error => console.error('Error uploading images:', error));
+    };
+
+
+    // Fetch all products and display them
+    function fetchProducts() {
+        fetch('/products')
+        .then(response => response.json())
+        .then(data => {
+            let productList = document.getElementById('productList');
+            productList.innerHTML = '';  // Clear the list before adding products
+            data.forEach(product => {
+                let item = document.createElement('li');
+                item.innerHTML = `
+                    <div>
+                        <strong>Όνομα:</strong> ${product.name}<br>
+                        <strong>Περιγραφή:</strong> ${product.description}<br>
+                        <strong>Τιμή:</strong> €${product.price.toFixed(2)}<br>
+                        <strong>Διαστάσεις:</strong> ${product.length}mm x ${product.width}mm x ${product.height}mm<br>
+                        <strong>Out of Stock:</strong> ${product.outOfStock ? 'Yes' : 'No'}<br>
+                        <strong>Βάρος:</strong> ${product.weight}kg<br>
+                        <strong>Εικόνες:</strong> 
+                        ${product.photoUrls ? product.photoUrls.map(url => `<img src="${url}" alt="${product.name}" width="100">`).join(' ') : 'Δεν υπάρχουν εικόνες διαθέσιμες'}<br>
+                        <strong>Μεγέθη:</strong> ${product.sizes ? product.sizes.join(', ') : 'Δεν υπάρχουν μεγέθη'}<br>
+                        <strong>GiftCard:</strong> ${product.giftCard ? 'Ναι' : 'Όχι'}<br>
+                        <strong>Έκπτωση (%):</strong> <input type="number" id="discount-${product.id}" value="${product.discount || 0}" min="0" max="100" step="1"> 
+                        <button onclick="applyDiscount(${product.id})">Εφαρμογή Έκπτωσης</button><br>
+                        <button onclick="deleteProduct(${product.id})">Διαγραφή</button>
+                        <button onclick="showUpdateForm(${product.id})">Ενημέρωση</button>
+                        <button onclick="toggleOutOfStock(${product.id}, ${product.outOfStock})">${product.outOfStock ? 'Set In Stock' : 'Set Out of Stock'}</button>
+                        <button onclick="moveProductUp(${product.id})">Μετακίνηση Πάνω</button>
+                        <button onclick="moveProductDown(${product.id})">Μετακίνηση Κάτω</button>
+                    </div>
+                    <hr>
+                `;
+                productList.appendChild(item);
+            });
+        })
+        .catch(error => console.error('Σφάλμα κατά την εμφάνιση των προϊόντων:', error));
+    }
+
+    function applyDiscount(productId) {
+        const discount = document.getElementById(`discount-${productId}`).value;
+        fetch(`/products/${productId}/updateDiscount`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ discount: parseFloat(discount) })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Έκπτωση ενημερώθηκε:', data);
+            fetchProducts();
+        })
+        .catch(error => console.error('Σφάλμα κατά την ενημέρωση της έκπτωσης:', error));
+    }
+
+
+    // Delete a product
+    function deleteProduct(productId) {
+        fetch(`/products/delete/${productId}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Product deleted successfully');
+                fetchProducts();
+            } else {
+                console.error('Failed to delete product');
+            }
+        })
+        .catch(error => console.error('Error deleting product:', error));
+    }
+
+    // Show the update form and populate it with the selected product data
+    function showUpdateForm(productId) {
+        fetch(`/products/${productId}`)
+        .then(response => response.json())
+        .then(product => {
+            document.getElementById('updateProductId').value = product.id;
+            document.getElementById('updateName').value = product.name;
+            document.getElementById('updateDescription').value = product.description;
+            document.getElementById('updatePrice').value = product.price;
+            document.getElementById('updateLength').value = product.length;
+            document.getElementById('updateWidth').value = product.width;
+            document.getElementById('updateHeight').value = product.height;
+            document.getElementById('updateWeight').value = product.weight;
+
+            document.getElementById('updateSizeS').checked = product.sizes.includes('S');
+            document.getElementById('updateSizeM').checked = product.sizes.includes('M');
+            document.getElementById('updateSizeL').checked = product.sizes.includes('L');
+            document.getElementById('updateSizeXl').checked = product.sizes.includes('XL');
+
+
+            //document.getElementById('updateProductFormContainer').style.display = 'block';
+
+            document.querySelectorAll('input[name="updateSize"]').forEach(cb => cb.checked = false);
+            
+            if (product.sizes && Array.isArray(product.sizes)) {
+                product.sizes.forEach(size => {
+                    document.getElementById("updateSize" + size.charAt(0).toUpperCase() + size.slice(1).toLowerCase()).checked = true;
+                });
+            }
+
+            document.getElementById("updateProductFormContainer").style.display = 'block';
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    // Update the product
+    document.getElementById("updateProductForm").onsubmit = function(event) {
+        event.preventDefault();
+
+        var productId = document.getElementById("updateProductId").value;
+        var updatedProduct = getUpdateProductData();
+
+        fetch(`/products/${productId}/updatePriceAndSizes`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedProduct),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            document.getElementById("updateProductFormContainer").style.display = 'none';
+            fetchProducts();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    };
+
+    // Toggle Out of Stock / In Stock
+    function toggleOutOfStock(productId, currentStatus) {
+        fetch(`/products/${productId}/toggleOutOfStock`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ outOfStock: !currentStatus })
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Product stock status updated');
+                fetchProducts();
+            } else {
+                console.error('Failed to update stock status');
+            }
+        })
+        .catch(error => console.error('Error toggling stock status:', error));
+    }
+
+    // Move product up
+     // Move product up
+    function moveProductUp(productId) {
+        fetch(`/products/${productId}/moveUp`, {
+            method: 'PUT'
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Product moved up:', data);
+            fetchProducts(); // Refresh the product list
+        })
+        .catch(error => console.error('Error moving product up:', error));
+    }
+
+    // Move product down
+    function moveProductDown(productId) {
+        fetch(`/products/${productId}/moveDown`, {
+            method: 'PUT'
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Product moved down:', data);
+            fetchProducts(); // Refresh the product list
+        })
+        .catch(error => console.error('Error moving product down:', error));
+    }
+    fetchProducts(); // Fetch products on page load
+</script>
+</body>
+</html>

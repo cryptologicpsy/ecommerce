@@ -1,0 +1,443 @@
+svg {
+    width: 30px;
+}
+
+a {
+    color: rgb(255, 255, 255);
+}
+
+body {
+    background-color: transparent;
+}
+
+.new-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon-cart {
+    position: relative;
+}
+
+.icon-cart span {
+    position: absolute;
+    background-color: red;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #fff;
+    top: 50%;
+    right: -20px;
+}
+
+.cartTab {
+    width: 400px;
+    max-width: 100%;
+    background-color: #353432;
+    color: #eee;
+    position: fixed;
+    top: 0;
+    right: 0px;
+    bottom: 0;
+    display: grid;
+    grid-template-rows: 70px 1fr 70px;
+    z-index: 99999;
+}
+
+.cartTab h1 {
+    padding: 20px;
+    margin: 0;
+    font-weight: 300;
+}
+
+.cartTab .btn {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.cartTab button {
+    background-color: #4f4f4f;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cartTab .close {
+    background-color: #eee;
+}
+
+.listCart {
+    overflow: auto;
+}
+
+.listCart::-webkit-scrollbar {
+    width: 0;
+}
+
+/*  */
+.cartTab {
+    right: -400px;
+    transition: 0.5s;
+}
+
+body.activeTabCart .cartTab {
+    right: 0;
+}
+
+body.activeTabCart .container {
+    transform: translateX(-250px);
+}
+
+/*  */
+
+
+
+/* Grid για τα προϊόντα */
+.listProduct {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 στήλες για μεγαλύτερες οθόνες */
+    justify-items: center;
+
+    
+}
+
+.listProduct .item {
+    /*background-color: #f9f9f9; */
+    border-radius: 20px;
+    text-align: center;
+}
+
+.listProduct .item img {
+    width: 180px;
+    height: 200px; /* Ορίστε το ύψος των εικόνων */
+    object-fit: cover; /* Διατηρεί τις διαστάσεις των εικόνων χωρίς να κόβονται */
+   /* border-radius: 10px;
+    /*filter: drop-shadow(0 50px 20px #0009); */
+
+}
+
+/* Grid για τα προϊόντα */
+.listProduct {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 στήλες για μεγαλύτερες οθόνες */
+    justify-items: center;
+    gap: 20px; /* Προσθέτει κενό μεταξύ των στοιχείων του grid */
+}
+
+.listProduct .item {
+    /*background-color: #f9f9f9; */
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px; /* Προσθέτει padding γύρω από τα items */
+}
+
+.listProduct .item img {
+    width: 180px;
+    height: 200px; /* Ορίστε το ύψος των εικόνων */
+    object-fit: cover; /* Διατηρεί τις διαστάσεις των εικόνων χωρίς να κόβονται */
+   /* border-radius: 10px;
+    filter: drop-shadow(0 50px 20px #0009); */
+}
+
+/* Στυλ για το κείμενο των προϊόντων */
+.listProduct .item h2 {
+    font-weight: 500;
+    font-size: large;
+    margin: 10px 0;
+}
+
+.listProduct .item .price {
+    font-size: small;
+    color: #333;
+}
+
+.listProduct .item button {
+    background-color: #353432;
+    color: #eee;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.listProduct .item button:hover {
+    background-color: #555;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 1200px) {
+    .listProduct {
+        grid-template-columns: repeat(3, 1fr); /* 3 στήλες για μεσαίες οθόνες */
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .listProduct {
+        grid-template-columns: repeat(2, 1fr); /* 2 στήλες για μικρότερες οθόνες */
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .listProduct {
+        grid-template-columns: 1fr !important; /* 1 στήλη για πολύ μικρές οθόνες */
+    }
+}
+
+/*  */
+
+.listCart .item img {
+    width: 100% !important;
+}
+
+.listCart .item {
+    display: grid !important;
+    grid-template-columns: 70px 150px 50px 1fr !important;
+    gap: 10px !important;
+    text-align: center !important;
+    align-items: center !important;
+}
+
+.listCart .quantity span {
+    display: inline-block !important;
+    width: 25px !important;
+    height: 25px !important;
+    background-color: #eee !important;
+    border-radius: 50% !important;
+    color: #555 !important;
+    cursor: pointer !important;
+}
+
+.listCart .quantity span:nth-child(2) {
+    background-color: transparent !important;
+    color: #eee !important;
+    cursor: auto !important;
+}
+
+.listCart .quantity {
+    display: flex !important;
+}
+
+.listCart .item:nth-child(even) {
+    background-color: #eee1 !important;
+}
+
+/*  */
+
+@media only screen and (max-width: 992px) {
+    .listProduct {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .detail {
+        grid-template-columns: 40% 1fr;
+    }
+}
+
+.navbar {
+    top: 0;
+    width: 100%;
+    background-color: rgba(21, 29, 32, 0.9) !important; /* Καθορίζει το χρώμα του φόντου με διαφάνεια */
+    height: 105px;
+    z-index: 99999;
+    position: fixed !important;
+     --navbar-height: 70px;
+     		    transition: transform 0.3s ease-in-out;
+
+}
+
+.navbar-nav .nav-link {
+    color: white !important; /* Καθορίζει το χρώμα των γραμμάτων σε λευκό */
+    font-family: 'Inter', sans-serif; /* Καθορίζει τη γραμματοσειρά σε Rag 123 ή οποιαδήποτε γενική sans-serif */
+    font-weight: normal !important;
+    font-size: 10px;
+}
+
+.navbar-brand {
+    color: white !important; /* Καθορίζει το χρώμα των γραμμάτων του λογότυπου σε λευκό */
+}
+
+.navbar-toggler-icon {
+    color: white;
+    z-index: 1000 !important; /* Καθορίζει το χρώμα του εικονιδίου του μενού σε λευκό */
+}
+
+.navbar-logo {
+    width: 170px; /* Orismos megethous eikonas */
+    height: auto; /* To megethos ths eikonas tha diatereitai kata ton arithmo pou orisate sthn 'width' */
+    margin-bottom: 10px;
+}
+
+/* Νέα προσθήκη */
+@media only screen and (max-width: 1000px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .navbar-brand span {
+        display: none; /* Κρύβει το κείμενο "Clowntown Tattoo & Piercing" σε μικρές οθόνες */
+    }
+
+    .navbar-toggler {
+        border: none;
+        color: white;
+        padding: 0;
+        margin-left: auto; /* Μετακινεί το hamburger icon στη δεξιά πλευρά */
+        background-color: transparent; /* Αφαιρεί το background */
+        width: auto; /* Προσαρμόζει το πλάτος */
+    }
+
+  
+
+    .navbar-toggler-icon:before {
+        content: "\2630"; /* Unicode χαρακτήρας για το hamburger icon */
+        color: white;
+        font-size: 1.5em;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .navbar-nav {
+        background-color: rgba(21, 29, 32, 0.9);
+        padding: 10px;
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 10px;
+    }
+
+    .navbar-nav .nav-link {
+        color: white !important;
+        font-size: 16px !important;
+    }
+
+    .navbar-collapse {
+        text-align: center;
+    }
+    
+    .navbar-logo {
+    width: auto; /* Orismos megethous eikonas */
+   height: 80px; /* To megethos ths eikonas tha diatereitai kata ton arithmo pou orisate sthn 'width' */
+}
+
+}
+
+@media (max-width: 1000px) {
+      #cart-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        z-index: 1000;
+        stroke: currentColor;
+      }
+      #cart-icon .icon-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #cart-icon .icon-cart svg {
+    width: 20px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+  }
+    }
+
+@media (min-width: 1000px) {
+  #cart-icon {
+    position: sticky;
+    top: 35px;
+    z-index: 1000000 !important; /* Ensure it is above other elements */
+    background-color: transparent;
+    border-radius: 100%;
+    padding: 10px;
+    stroke: white;
+  }
+ #cart-icon .icon-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #cart-icon .icon-cart svg {
+    width: 20px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+  }
+    }
+    
+    .item {
+    position: relative;
+}
+
+.outOfStockTag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+
+
+.footer {
+  position: absolute;
+      background-color: #161616 !important;
+
+  width: 100%;
+  right: 0;
+  left: 0;
+  height: 230px;
+  z-index: 9999;
+      text-align: center !important; /* kentrare ta periexomena sto footer */
+
+}
+
+.footer-content {
+	padding-top: 20px !important;
+    display: flex !important;
+    justify-content: space-around !important;
+    flex-wrap: wrap !important;
+          background-color: #161616 !important;
+color: white !important;
+}
+
+.footer-content > div {
+    flex: 1 !important;
+    padding: 0 20px !important;
+}
+
+.location,
+.contact,
+.opening-hours,
+.join-us {
+    margin-bottom: 20px !important;
+    flex: 1 !important;
+}
+
+.location, .contact, .opening-hours, join-us {
+    margin-bottom: 14px !important;
+}
+
+.location h3, .contact h3, .opening-hours h3, .join-us h3 {
+    padding-bottom: 5px !important;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+
+
+
+
+
+
+

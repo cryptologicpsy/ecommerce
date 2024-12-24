@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCommerce Shop</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./global.css">
+    <link rel="stylesheet" href="./products.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap">
+    <style>
+        .product {
+            margin-top: 50px;
+            margin-bottom: 15px;
+            width: 250px;
+            display: inline-block;
+            margin-right: 5px;
+            text-align: center;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .menu-column h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .products-section {
+            padding-right: 15px;
+        }
+        .container h1, .container h2 {
+            margin-top: 90px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .menu-column, .shoppingcart {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            overflow-y: auto;
+            margin-top: 200px;
+        }
+        .shoppingcart {
+            right: 150px;
+            margin-top: 100px;
+        }
+        .shoppingcart h2 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        /* Στυλ για τον πίνακα του καλαθιού αγορών */
+        #cart-items {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #cart-items .item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #cart-items .item button {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="./public/ct-logo-triangle-no-bg@2x.png" alt="Clowntown Logo" class="navbar-logo">
+            Clowntown Tattoo & Piercing
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active"><a class="nav-link" href="#">ABOUT US</a></li>
+                <li class="nav-item"><a class="nav-link" href="/artistsview">ARTISTS</a></li>
+                <li class="nav-item"><a class="nav-link" href="/clowntowngallery">GALLERY</a></li>
+                <li class="nav-item"><a class="nav-link" href="/consultation">BOOK AN APPOINTMENT</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">MERCH</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">CONTACT</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="products-section">
+    <div class="container">
+        <h1>MERCH</h1>
+        <h2>ALL PRODUCTS</h2>
+        <div id="productContainer" class="row"></div>
+    </div>
+    <div class="shoppingcart">
+        <h2>Shopping Cart</h2>
+        <div id="cart-items"></div> <!-- Πίνακας για το καλάθι αγορών -->
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/products')
+            .then(response => response.json())
+            .then(data => {
+                let productContainer = document.getElementById('productContainer');
+                data.forEach((product, index) => {
+                    if (index % 3 === 0) {
+                        let newRow = document.createElement('div');
+                        newRow.className = 'row';
+                        productContainer.appendChild(newRow);
+                    }
+                    let currentRow = productContainer.lastElementChild;
+                    let newProduct = document.createElement('div');
+                    newProduct.className = 'col-md-3';
+                    newProduct.innerHTML = `
+                        <div class="product">
+                            <img src="${product.photoUrl}" alt="${product.name}">
+                            <h3>${product.name}</h3>
+                            <p>${product.description}</p>
+                            <p>Price: €${product.price}</p>
+                            <button onclick="addToCart('${product.id}', ${product.price})">Add to Cart</button>
+                        </div>
+                    `;
+                    currentRow.appendChild(newProduct);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    function addToCart(productId, productPrice) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || {};
+        if (cart[productId]) {
+            cart[productId].quantity += 1;
+        } else {
+            cart[productId] = { quantity: 1, price: productPrice };
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartUI(); // Καλούμε τη συνάρτηση για ανανέωση του καλαθιού αγορών
+        alert("Product added to cart!");
+    }
+
+    // Συνάρτηση για ανανέωση του καλαθιού
+function updateCartUI() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || {};
+        let cartItemsDiv = document.getElementById('cart-items');
+        cartItemsDiv.innerHTML = ''; // Αδειάζουμε τον πίνακα πριν από την ανανέωση
+
+        if (Object.keys(cart).length === 0) {
+            cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
+            return;
+        }
+
+        for (const [productId, item] of Object.entries(cart)) {
+            // Δημιουργία ενός νέου στοιχείου προϊόντος στο καλάθι
+            let itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            itemDiv.innerHTML = `
+                <p>Product ID: ${productId}</p>
+                <p>Quantity: ${item.quantity}</p>
+                <p>Price: €${item.price * item.quantity}</p>
+                <button onclick="removeFromCart('${productId}')">Remove</button>
+            `;
+            cartItemsDiv.appendChild(itemDiv);
+        }
+    }
+
+    // Συνάρτηση για αφαίρεση προϊόντος από το καλάθι
+    function removeFromCart(productId) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || {};
+        delete cart[productId];
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartUI(); // Ανανεώνουμε το UI του καλαθιού
+    }
+
+    // Καλούμε τη συνάρτηση updateCartUI() όταν η σελίδα φορτώνει
+    document.addEventListener('DOMContentLoaded', updateCartUI);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order and Product Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #results {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .message {
+            text-align: center;
+            color: #555;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        async function searchByOrderId() {
+            const orderId = document.getElementById('orderId').value.trim();
+            const resultDiv = document.getElementById('results');
+            resultDiv.innerHTML = ''; // Clear previous results
+
+            if (!orderId) {
+                resultDiv.innerHTML = '<p class="message">Please enter an Order ID to search.</p>';
+                return;
+            }
+
+            const response = await fetch(`/api/orders/by-order-id/${orderId}`);
+            if (response.ok) {
+                const order = await response.json();
+                resultDiv.innerHTML = generateOrderDetails(order);
+            } else {
+                resultDiv.innerHTML = '<p class="message">No order found with the given Order ID.</p>';
+            }
+        }
+
+        async function searchByPaymentIntentId() {
+            const paymentIntentId = document.getElementById('paymentIntentId').value.trim();
+            const resultDiv = document.getElementById('results');
+            resultDiv.innerHTML = ''; // Clear previous results
+
+            if (!paymentIntentId) {
+                resultDiv.innerHTML = '<p class="message">Please enter a Payment Intent ID to search.</p>';
+                return;
+            }
+
+            const response = await fetch(`/api/orders/by-payment-intent-id/${paymentIntentId}`);
+            if (response.ok) {
+                const order = await response.json();
+                resultDiv.innerHTML = generateOrderDetails(order);
+            } else {
+                resultDiv.innerHTML = '<p class="message">No order found with the given Payment Intent ID.</p>';
+            }
+        }
+
+        async function fetchAllOrders() {
+            const response = await fetch('/api/orders/all');
+            const resultDiv = document.getElementById('results');
+            resultDiv.innerHTML = ''; // Clear previous results
+
+            if (response.ok) {
+                const orders = await response.json();
+                if (orders.length === 0) {
+                    resultDiv.innerHTML = '<p class="message">No orders found in the database.</p>';
+                } else {
+                    resultDiv.innerHTML = generateOrderTable(orders);
+                }
+            } else {
+                resultDiv.innerHTML = '<p class="message">Failed to fetch orders. Please try again later.</p>';
+            }
+        }
+
+        async function searchProductById() {
+            const productId = document.getElementById('productId').value.trim();
+            const resultDiv = document.getElementById('results');
+            resultDiv.innerHTML = ''; // Clear previous results
+
+            if (!productId) {
+                resultDiv.innerHTML = '<p class="message">Please enter a Product ID to search.</p>';
+                return;
+            }
+
+            const response = await fetch(`/products/${productId}`);
+            if (response.ok) {
+                const product = await response.json();
+                resultDiv.innerHTML = generateProductDetails(product);
+            } else {
+                resultDiv.innerHTML = '<p class="message">No product found with the given Product ID.</p>';
+            }
+        }
+
+        function generateOrderDetails(order) {
+            return `
+                <div>
+                    <h3>Order Details</h3>
+                    <p><strong>Order ID:</strong> ${order.orderId}</p>
+                    <p><strong>Customer Email:</strong> ${order.customerEmail}</p>
+                    <p><strong>Product Details:</strong> ${order.productDetails}</p>
+                    <p><strong>Payment Intent ID:</strong> ${order.paymentIntentId}</p>
+                    <p><strong>Payment Status:</strong> ${order.paymentStatus}</p>
+                </div>
+            `;
+        }
+
+        function generateOrderTable(orders) {
+            let table = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer Email</th>
+                            <th>Product Details</th>
+                            <th>Payment Intent ID</th>
+                            <th>Payment Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            orders.forEach(order => {
+                table += `
+                    <tr>
+                        <td>${order.orderId}</td>
+                        <td>${order.customerEmail}</td>
+                        <td>${order.productDetails}</td>
+                        <td>${order.paymentIntentId}</td>
+                        <td>${order.paymentStatus}</td>
+                        <td>
+                            <button onclick="deleteOrder('${order.orderId}')">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            table += `</tbody></table>`;
+            return table;
+        }
+
+        // Delete an order by orderId
+        async function deleteOrder(orderId) {
+            if (!confirm(`Are you sure you want to delete the order with ID: ${orderId}?`)) {
+                return;
+            }
+
+            const response = await fetch(`/api/orders/delete/${orderId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                alert('Order deleted successfully.');
+                fetchAllOrders(); // Refresh the list
+            } else {
+                alert('Failed to delete the order. Make sure the ID exists.');
+            }
+        }
+
+        function generateProductDetails(product) {
+            return `
+                <div>
+                    <h3>Product Details</h3>
+                    <p><strong>Product ID:</strong> ${product.id}</p>
+                    <p><strong>Name:</strong> ${product.name}</p>
+                    <p><strong>Description:</strong> ${product.description}</p>
+                    <p><strong>Price:</strong> ${product.price}</p>
+                    <p><strong>Sizes:</strong> ${product.sizes.join(', ')}</p>
+                    <p><strong>Out of Stock:</strong> ${product.outOfStock ? 'Yes' : 'No'}</p>
+                    <p><strong>Discount:</strong> ${product.discount}%</p>
+                    <p><strong>Photo URLs:</strong></p>
+                    <ul>${product.photoUrls.map(url => `<li>${url}</li>`).join('')}</ul>
+                </div>
+            `;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Order and Product Search</h1>
+        <div>
+            <h2>Search by Order ID</h2>
+            <label for="orderId">Order ID:</label>
+            <input type="text" id="orderId" placeholder="Enter Order ID">
+            <button onclick="searchByOrderId()">Search</button>
+        </div>
+        <div>
+            <h2>Search by Payment Intent ID</h2>
+            <label for="paymentIntentId">Payment Intent ID:</label>
+            <input type="text" id="paymentIntentId" placeholder="Enter Payment Intent ID">
+            <button onclick="searchByPaymentIntentId()">Search</button>
+        </div>
+        <div>
+            <h2>Fetch All Orders</h2>
+            <button onclick="fetchAllOrders()">Fetch All</button>
+        </div>
+        <div>
+            <h2>Search Product by ID</h2>
+            <label for="productId">Product ID:</label>
+            <input type="text" id="productId" placeholder="Enter Product ID">
+            <button onclick="searchProductById()">Search</button>
+        </div>
+        <div id="results">
+            <!-- Results will appear here -->
+        </div>
+    </div>
+</body>
+</html>

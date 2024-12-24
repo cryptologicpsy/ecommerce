@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./template.css">
+    <link rel="stylesheet" href="./loader.css" />
+
+    <style>
+
+
+
+        body {
+            background-color: white!important;
+            margin: 0;
+        }
+        
+
+ 
+     
+        .content {
+            padding-top: 120px !important; /* Adjust according to the height of the menu */
+        }
+
+        .merch-title {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #333;
+        }
+        .old-price {
+    text-decoration: line-through;
+    color: #888;
+    margin-right: 10px;
+}
+
+.discount {
+    color: #ff0000;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+    </style>
+</head>
+<body style="display: flex; flex-direction: column; height: 100vh;" >
+    <div class="overlay"></div> <!-- Μαύρο φόντο -->
+
+    <div class="loader"></div> <!-- Προσθήκη του loader -->
+
+    <img src="./public/ct-logo-triangle-no-bg@2x.png" class="logo" alt="Logo">
+
+
+
+    <div class="content" style="flex: 1;" >
+        <!-- Προσθήκη της λέξης "merch" -->
+        <div class="merch-title">SHOP</div>
+        
+        <div class="listProduct">
+        </div>
+        <!-- Your content goes here -->
+    </div>
+    <div id="temporaryContent"></div>
+
+    <div id="app"></div>
+
+   <script src="js/loader.js"></script>
+
+    <script src="js/productsindex.js" type="module"></script>
+</body>
+</html>

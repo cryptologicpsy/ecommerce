@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e-commerce</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="template.css">
+  <link rel="stylesheet" href="global2.css">
+  <style>
+    .navbar--hidden{
+      transform: translateY(calc(-2 * var(--navbar-height))) !important;
+      box-shadow: none !important;
+    }
+  
+    .footer-contenttemplate {
+      background-color: #1f1f1f !important;
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-contenttemplate div {
+      margin: 10px;
+      flex: 1 1 200px; /* Ensures each div takes up at least 200px and grows to fit available space */
+    }
+
+    .footer-contenttemplate h14 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    .footer-contenttemplate p14, .footer-contenttemplate a14, .footer-contenttemplate a13 {
+      font-size: 1em;
+      line-height: 1.5em;
+    }
+
+    .footer-contenttemplate a14, .footer-contenttemplate a13 {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-contenttemplate a14:hover, .footer-contenttemplate a13:hover {
+      text-decoration: underline;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-logo img {
+      max-height: 150px;
+      margin-right: 15px;
+      transform: translateY(-40px);
+    }
+
+    @media (max-width: 768px) {
+  .footer-contenttemplate {
+    flex-direction: column; /* Τα στοιχεία να στοιχίζονται κάθετα */
+    align-items: center; /* Κεντράρει όλα τα στοιχεία */
+    text-align: center; /* Κεντρική στοίχιση κειμένου */
+  }
+
+  .footer-contenttemplate div {
+    margin: 10px 0; /* Ίδιο περιθώριο πάνω-κάτω */
+    flex: none; /* Απενεργοποίηση αυτόματης επέκτασης */
+  }
+
+  .footer-logo img {
+    margin: 0 auto; /* Κεντράρισμα του λογότυπου */
+    transform: translateY(0); /* Κατάργηση offset */
+  }
+}
+
+    
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed">
+    <div class="container" style="max-width: 100%;">
+      <a class="navbar-brand" href="/">
+        <span>e-commerce</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/about">ABOUT US</a>
+          </li>
+         
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/view-products">SHOP</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact-us">CONTACT US</a>
+          </li>
+        </ul>
+      </div>
+      <a id="cart-icon" href="#">
+        <div class="icon-cart">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1"/>
+          </svg>
+          <span id="cart-item-count">0</span>
+        </div>
+      </a>
+    </div>
+  </nav>
+  <div class="container">
+    <header class="new-header">
+      <div class="title"></div>
+    </header>
+    <div id="contentTab">
+    </div>
+  </div>
+  <div class="cartTab">
+    <h1>Shopping Cart</h1>
+    <div class="listCart" style="padding: 15px;"></div>
+    <div class="btn">
+      <button class="close">CLOSE</button>
+      <button class="checkOut">Check Out</button>
+    </div>
+  </div>
+
+  <footer>
+   
+       
+  </footer>
+
+  <script src="js/basket.js" type="module"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
